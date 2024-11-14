@@ -1,0 +1,40 @@
+{
+  "name": "primex-monitor-desktop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "serve": "node ./service.js",
+    "stop": "node ./service.js uninstall",
+    "test": "npx ts-node ./src/test/add.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^6.6.0",
+    "globals": "^15.12.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@types/node-cron": "^3.0.11",
+    "dotenv": "^16.4.5",
+    "node-adodb": "^5.0.3",
+    "node-cron": "^3.0.3",
+    "node-windows": "^1.0.0-beta.8",
+    "zod": "^3.23.8"
+  }
+}
