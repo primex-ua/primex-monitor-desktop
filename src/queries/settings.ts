@@ -1,13 +1,9 @@
-import { z } from 'zod';
-import db from '../lib/db';
-import { dbSettingsSchema } from '../schemas/dbSchema';
+import db from '../drizzle/db';
 
 export async function getSettings() {
-  const sql = `SELECT NameInComp1, NameInComp2, NameInComp3, NameInComp4, NameInComp5, NameInComp6 FROM НастройкиПрограммы`;
+  const dbSettings = await db.query.settings.findFirst();
 
-  const rawSettings = await db.query(sql);
-
-  const dbSettings = z.array(dbSettingsSchema).parse(rawSettings)[0];
+  if (!dbSettings) throw new Error('Не вдалося отримати дані з НастройкиПрограммы');
 
   return dbSettings;
 }
