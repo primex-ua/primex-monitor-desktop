@@ -15,7 +15,7 @@ export const products = sqliteTable('Продукция', {
   mixture: real('Смесь_Получено').notNull(),
   moistureContent: real('Смесь_Получено').notNull(),
   weight: real('PytomaVaga').notNull(),
-  mode: text('РежимИсполнения', { enum: ['Р', 'А'] }),
+  mode: text('РежимИсполнения', { enum: ['Р', 'А'] }).notNull(),
   // Ploschad: real('Ploschad').notNull(),
   // C_U1: real('C_U1'),
   // C_U2: real('C_U2'),
