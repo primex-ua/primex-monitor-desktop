@@ -14,7 +14,10 @@ export const apiEntrySchema = z.object({
   moistureContent: z.number(),
   producedRunningMeters: z.number(),
   mode: z.enum(['auto', 'manual']),
-  mixedAt: z.string(),
+  mixedAt: z
+    .string()
+    .datetime()
+    .transform((dateTime) => new Date(dateTime)),
 });
 
 export type ApiEntry = z.infer<typeof apiEntrySchema>;
