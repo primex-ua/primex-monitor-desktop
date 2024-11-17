@@ -1,24 +1,14 @@
-import { z } from 'zod';
+import db from '../drizzle/db';
 import { transformData } from '../lib/transformData';
-import { dbRecordSchema, dbSettingsSchema } from '../schemas/dbSchema';
-import db from '../lib/db';
 import { getSettings } from './settings';
-import { formatDateToAccessDate } from '../lib/formatDate';
 
-export async function getProductsSince(since: string) {
-  const sql = `
-  SELECT ДатаВремя, Pres, НаименованиеРецепта, Компонент1_Получено, Компонент2_Получено, Компонент3_Получено,
-  Компонент4_Получено, Компонент5_Получено, Компонент6_Получено, Вода_Получено, Смесь_Получено, ВлажСмеси_Получено,
-  PytomaVaga, РежимИсполнения
-  FROM Продукция 
-  WHERE ДатаВремя > #${formatDateToAccessDate(since)}#
-  `;
-
+export async function getProductsSince(since: Date) {
   try {
     const dbSettings = await getSettings();
 
-    const rawData = await db.query(sql);
-    const dbData = z.array(dbRecordSchema).parse(rawData);
+    const dbData = await db.query.products.findMany({
+      where: (products, { gt }) => gt(products.dateTime, since),
+    });
     // console.log('DB DATA\n', dbData[0]);
 
     const apiData = transformData(dbData, dbSettings);

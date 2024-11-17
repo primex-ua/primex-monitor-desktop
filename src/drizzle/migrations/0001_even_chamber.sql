@@ -1,0 +1,1 @@
+ALTER TABLE `Продукция` ADD `ВлажСмеси_Получено` real NOT NULL;
