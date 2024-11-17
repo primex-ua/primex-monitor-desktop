@@ -47,13 +47,8 @@
     "zod-validation-error": "^3.4.0"
   },
   "pkg": {
-    "scripts": [
-      "./build/*.js"
-    ],
     "assets": [
-      "node_modules/drizzle-orm/**/*",
-      "../Base/primex-monitor-desktop.db",
-      "./timestamp.json"
+      "node_modules/drizzle-orm/**/*"
     ],
     "targets": [
       "latest-win-x64"
