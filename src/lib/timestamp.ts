@@ -3,7 +3,7 @@ import path from 'path';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
-const TIMESTAMP_FILE_PATH = path.resolve(__dirname, '../../timestamp.json');
+const TIMESTAMP_FILE_PATH = path.resolve(process.cwd(), './timestamp.json');
 
 const dateSchema = z.object({
   lastTimestamp: z
