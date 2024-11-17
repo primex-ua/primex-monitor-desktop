@@ -2,9 +2,9 @@ import db from '../drizzle/db';
 import { products } from '../drizzle/schema';
 import { InsertDbRecord } from '../schemas/dbSchema';
 
-function getRandomNumber(min: number, max: number, isInteger = true) {
+function getRandomNumber(min: number, max: number, decimalPart = 0) {
   const value = Math.random() * (max - min + 1) + min;
-  return isInteger ? Math.floor(value) : parseFloat(value.toFixed(3));
+  return !decimalPart ? Math.floor(value) : parseFloat(value.toFixed(decimalPart));
 }
 
 function generateRandomRecord(): InsertDbRecord {
@@ -12,7 +12,7 @@ function generateRandomRecord(): InsertDbRecord {
     dateTime: new Date(),
     mode: getRandomNumber(1, 2) % 2 === 0 ? 'А' : 'Р',
     mixture: getRandomNumber(50, 1000),
-    moistureContent: getRandomNumber(1, 20, false),
+    moistureContent: getRandomNumber(1, 20, 1),
     name: `Рецепт ${getRandomNumber(1, 30)}`,
     Pres: getRandomNumber(1, 10),
     water: getRandomNumber(30, 600),
@@ -27,7 +27,9 @@ function generateRandomRecord(): InsertDbRecord {
 }
 
 async function seed() {
-  await db.insert(products).values(generateRandomRecord());
+  const result = await db.insert(products).values(generateRandomRecord()).returning();
+
+  console.log(`Зроблено новий запис (id=${result[0].id}).`);
 }
 
 seed().catch((e) => console.error(e));
