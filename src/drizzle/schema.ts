@@ -13,7 +13,7 @@ export const products = sqliteTable('Продукция', {
   component6: real('Компонент6_Получено'),
   water: real('Вода_Получено').notNull(),
   mixture: real('Смесь_Получено').notNull(),
-  moistureContent: real('Смесь_Получено').notNull(),
+  moistureContent: real('ВлажСмеси_Получено').notNull(),
   weight: real('PytomaVaga').notNull(),
   mode: text('РежимИсполнения', { enum: ['Р', 'А'] }).notNull(),
   // Ploschad: real('Ploschad').notNull(),

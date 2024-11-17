@@ -8,6 +8,13 @@
       "when": 1731801507556,
       "tag": "0000_careless_rattler",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1731804326864,
+      "tag": "0001_even_chamber",
+      "breakpoints": true
     }
   ]
 }
