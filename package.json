@@ -8,7 +8,7 @@
     "start": "ts-node src/index.ts",
     "serve": "node ./service.js",
     "stop": "node ./service.js uninstall",
-    "test": "npx ts-node ./src/test/add.ts"
+    "seed": "npx ts-node ./src/helpers/seed.ts"
   },
   "keywords": [],
   "author": "",
