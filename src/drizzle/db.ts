@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import { createClient } from '@libsql/client';
-import { drizzle } from 'drizzle-orm/libsql';
+import Database from 'better-sqlite3';
+import { drizzle } from 'drizzle-orm/better-sqlite3';
 import * as schema from './schema';
 
-const client = createClient({ url: `file:${process.env.DB_PATH!}` });
-const db = drizzle(client, { schema });
+const sqlite = new Database(process.env.DB_PATH!);
+const db = drizzle({ client: sqlite, schema });
 
 export default db;
