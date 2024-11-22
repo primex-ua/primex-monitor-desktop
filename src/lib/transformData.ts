@@ -18,6 +18,8 @@ export function transformData(data: DbRecord[], dbSettings: DbSettings) {
     if (dbSettings.NameInComp6 && d.component6)
       materialsConsumed.push({ name: dbSettings.NameInComp6, value: d.component6 });
 
+    materialsConsumed.push({ name: 'Вода', value: d.water });
+
     return {
       name: d.name,
       mixedAt: d.dateTime,
