@@ -2,27 +2,47 @@ import db from '../drizzle/db';
 import { products } from '../drizzle/schema';
 import { InsertDbRecord } from '../schemas/dbSchema';
 
+const NAMES = ['Рецепт 1', 'Рецепт 2', 'Рецепт 3', 'Рецепт 4', 'Рецепт 5', 'Без обліку'];
+
 function getRandomNumber(min: number, max: number, decimalPart = 0) {
   const value = Math.random() * (max - min + 1) + min;
   return !decimalPart ? Math.floor(value) : parseFloat(value.toFixed(decimalPart));
 }
 
 function generateRandomRecord(): InsertDbRecord {
+  const index = Math.floor(Math.random() * 6);
+
+  const isBackupRecord = index === 5;
+
+  const name = NAMES[index];
+
+  const components = [
+    getRandomNumber(30, 600, 1),
+    getRandomNumber(30, 600, 1),
+    getRandomNumber(30, 600, 1),
+    getRandomNumber(30, 600, 1),
+    getRandomNumber(30, 600, 1),
+    getRandomNumber(30, 600, 1),
+    getRandomNumber(10, 90, 2),
+  ];
+
+  const totalWeight = components.reduce((acc, value) => acc + value, 0);
+
   return {
     dateTime: new Date(),
-    mode: getRandomNumber(1, 2) % 2 === 0 ? 'А' : 'Р',
-    mixture: getRandomNumber(50, 1000),
-    moistureContent: getRandomNumber(1, 20, 2),
-    name: `Рецепт ${getRandomNumber(1, 30)}`,
-    Pres: getRandomNumber(1, 10),
-    water: getRandomNumber(30, 600),
-    weight: getRandomNumber(30, 600),
-    component1: getRandomNumber(30, 600, 1),
-    component2: getRandomNumber(30, 600, 1),
-    component3: getRandomNumber(30, 600, 1),
-    component4: getRandomNumber(30, 600, 1),
-    component5: getRandomNumber(30, 600, 1),
-    component6: getRandomNumber(30, 600, 1),
+    name,
+    mode: !isBackupRecord ? (getRandomNumber(1, 2) % 2 === 0 ? 'А' : 'Р') : null,
+    moistureContent: !isBackupRecord ? getRandomNumber(1, 20, 2) : null,
+    press: !isBackupRecord ? getRandomNumber(1, 10) : null,
+    specificWeight: !isBackupRecord ? getRandomNumber(30, 600) : null,
+    water: components[0],
+    component1: components[1],
+    component2: components[2],
+    component3: components[3],
+    component4: components[4],
+    component5: components[5],
+    component6: components[6],
+    totalWeight,
   };
 }
 
