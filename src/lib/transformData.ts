@@ -25,9 +25,9 @@ export function transformData(data: DbRecord[], dbSettings: DbSettings) {
       mixedAt: d.dateTime,
       press: d.press,
       mode: (d.mode === 'А' ? 'auto' : 'manual') as ApiEntry['mode'],
-      totalWeigth: d.totalWeigth,
+      totalWeight: d.totalWeight,
       moistureContent: d.moistureContent,
-      producedRunningMeters: d.specificWeight !== null ? d.totalWeigth / d.specificWeight : null,
+      producedRunningMeters: d.specificWeight !== null ? d.totalWeight / d.specificWeight : null,
       materialsConsumed,
     };
   });

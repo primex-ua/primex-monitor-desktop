@@ -13,7 +13,7 @@ export const apiEntrySchema = z.object({
   name: z.string(),
   press: z.number().nullable(),
   materialsConsumed: materialsSchema,
-  totalWeigth: z.number(),
+  totalWeight: z.number(),
   moistureContent: z.number().nullable(),
   producedRunningMeters: z.number().nullable(),
   mode: z.enum(['auto', 'manual']).nullable(),
