@@ -4,16 +4,19 @@ export const materialsSchema = z.array(
   z.object({
     name: z.string(),
     value: z.number(),
+    units: z.string().optional(),
+    decimalPart: z.number().optional(),
   }),
 );
 
 export const apiEntrySchema = z.object({
   name: z.string(),
-  press: z.number(),
+  press: z.number().nullable(),
   materialsConsumed: materialsSchema,
-  moistureContent: z.number(),
-  producedRunningMeters: z.number(),
-  mode: z.enum(['auto', 'manual']),
+  totalWeigth: z.number(),
+  moistureContent: z.number().nullable(),
+  producedRunningMeters: z.number().nullable(),
+  mode: z.enum(['auto', 'manual']).nullable(),
   mixedAt: z
     .string()
     .datetime()
