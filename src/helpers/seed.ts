@@ -26,12 +26,12 @@ function generateRandomRecord(): InsertDbRecord {
     getRandomNumber(10, 90, 2),
   ];
 
-  const totalWeight = components.reduce((acc, value) => acc + value, 0);
+  const totalWeight = parseFloat(components.reduce((acc, value) => acc + value, 0).toFixed(1));
 
-  return {
+  const newRecord = {
     dateTime: new Date(),
     name,
-    mode: !isBackupRecord ? (getRandomNumber(1, 2) % 2 === 0 ? 'А' : 'Р') : null,
+    mode: !isBackupRecord ? ((getRandomNumber(1, 2) % 2 === 0 ? 'А' : 'Р') as 'А' | 'Р') : null,
     moistureContent: !isBackupRecord ? getRandomNumber(1, 20, 2) : null,
     press: !isBackupRecord ? getRandomNumber(1, 10) : null,
     specificWeight: !isBackupRecord ? getRandomNumber(30, 600) : null,
@@ -44,6 +44,8 @@ function generateRandomRecord(): InsertDbRecord {
     component6: components[6],
     totalWeight,
   };
+
+  return newRecord;
 }
 
 async function seed(length: number = 1) {
