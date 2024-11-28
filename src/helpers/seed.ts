@@ -18,13 +18,13 @@ function generateRandomRecord(): InsertDbRecord {
   const name = NAMES[index];
 
   const components = [
-    getRandomNumber(60, 100, 1), // вода
-    getRandomNumber(150, 200, 1), // відсів
-    getRandomNumber(350, 450, 1), // пісок
-    getRandomNumber(150, 200, 1), // щебень
-    getRandomNumber(150, 200, 1), // щебень 2
-    getRandomNumber(150, 200, 1), // цемент
-    getRandomNumber(2, 15, 2), // хім. добавки
+    MIXER_VOULUME * getRandomNumber(60, 100, 1), // вода
+    MIXER_VOULUME * getRandomNumber(150, 200, 1), // відсів
+    MIXER_VOULUME * getRandomNumber(350, 450, 1), // пісок
+    MIXER_VOULUME * getRandomNumber(150, 200, 1), // щебень
+    MIXER_VOULUME * getRandomNumber(150, 200, 1), // щебень 2
+    MIXER_VOULUME * getRandomNumber(150, 200, 1), // цемент
+    MIXER_VOULUME * getRandomNumber(2, 15, 2), // хім. добавки
   ];
 
   const totalWeight = parseFloat(components.reduce((acc, value) => acc + value, 0).toFixed(1));
@@ -36,17 +36,15 @@ function generateRandomRecord(): InsertDbRecord {
     moistureContent: !isBackupRecord ? getRandomNumber(1, 20, 2) : null,
     press: !isBackupRecord ? getRandomNumber(1, 10) : null,
     specificWeight: !isBackupRecord ? getRandomNumber(500, 2500) : null,
-    water: components[0] * MIXER_VOULUME,
-    component1: components[1] * MIXER_VOULUME,
-    component2: components[2] * MIXER_VOULUME,
-    component3: components[3] * MIXER_VOULUME,
-    component4: components[4] * MIXER_VOULUME,
-    component5: components[5] * MIXER_VOULUME,
-    component6: components[6] * MIXER_VOULUME,
+    water: components[0],
+    component1: components[1],
+    component2: components[2],
+    component3: components[3],
+    component4: components[4],
+    component5: components[5],
+    component6: components[6],
     totalWeight,
   };
-
-  if (isBackupRecord) console.log(newRecord.mode);
 
   return newRecord;
 }
