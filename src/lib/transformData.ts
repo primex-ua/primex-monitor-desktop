@@ -24,7 +24,7 @@ export function transformData(data: DbRecord[], dbSettings: DbSettings) {
       name: d.name,
       mixedAt: d.dateTime,
       press: d.press,
-      mode: (d.mode === 'А' ? 'auto' : 'manual') as ApiEntry['mode'],
+      mode: d.mode ? ((d.mode === 'А' ? 'auto' : 'manual') as ApiEntry['mode']) : null,
       totalWeight: d.totalWeight,
       moistureContent: d.moistureContent,
       producedRunningMeters: d.specificWeight !== null ? d.totalWeight / d.specificWeight : null,
