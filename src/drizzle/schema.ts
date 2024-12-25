@@ -1,8 +1,11 @@
+import { sql } from 'drizzle-orm';
 import { int, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export const products = sqliteTable('Продукция', {
   id: int().primaryKey({ autoIncrement: true }),
-  dateTime: int('ДатаВремя', { mode: 'timestamp' }).notNull(),
+  dateTime: int('ДатаВремя', { mode: 'timestamp' })
+    .notNull()
+    .default(sql`(unixepoch())`),
   press: int('Pres'),
   name: text('НаименованиеРецепта').notNull(),
   component1: real('Компонент1_Получено'),

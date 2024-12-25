@@ -6,7 +6,10 @@ export const dbRecordSchema = createSelectSchema(products);
 
 export type DbRecord = z.infer<typeof dbRecordSchema>;
 
-export const insertDbRecordSchema = createInsertSchema(products);
+export const insertDbRecordSchema = createInsertSchema(products).omit({
+  dateTime: true,
+  id: true,
+});
 
 export type InsertDbRecord = z.infer<typeof insertDbRecordSchema>;
 
