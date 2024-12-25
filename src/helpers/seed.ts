@@ -30,7 +30,6 @@ function generateRandomRecord(): InsertDbRecord {
   const totalWeight = parseFloat(components.reduce((acc, value) => acc + value, 0).toFixed(1));
 
   const newRecord = {
-    dateTime: new Date(),
     name,
     mode: !isBackupRecord ? ((getRandomNumber(1, 2) % 2 === 0 ? 'А' : 'Р') as 'А' | 'Р') : null,
     moistureContent: !isBackupRecord ? getRandomNumber(1, 20, 2) : null,
@@ -51,10 +50,7 @@ function generateRandomRecord(): InsertDbRecord {
 
 async function seed(length: number = 1) {
   for (let i = 0; i < length; i++) {
-    const result = await db
-      .insert(products)
-      .values({ ...generateRandomRecord(), dateTime: new Date() })
-      .returning();
+    const result = await db.insert(products).values(generateRandomRecord()).returning();
 
     console.log(`Зроблено новий запис (id=${result[0].id}).`);
 
